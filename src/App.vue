@@ -1,22 +1,37 @@
 <script setup>
 defineProps({
+  errorMessage: {
+    type: String,
+    default: ''
+  },
   maskedToken: {
     type: String,
-    required: true
+    default: ''
   }
 })
 </script>
 
 <template>
   <main class="page">
-    <section class="card">
+    <section :class="['card', { error: errorMessage }]">
+      <template v-if="errorMessage">
+        <h1>Secret error</h1>
+        <p class="message">{{ errorMessage }}</p>
+      </template>
+
+      <template v-else>
       <h1>Secret loaded</h1>
-      <p>Token ending: <strong>{{ maskedToken }}</strong></p>
+      <p class="message">Token ending: <strong>{{ maskedToken }}</strong></p>
+      </template>
     </section>
   </main>
 </template>
 
 <style scoped>
+:global(body) {
+  margin: 0;
+}
+
 .page {
   min-height: 100vh;
   display: grid;
@@ -25,6 +40,7 @@ defineProps({
   background: #0f172a;
   color: #e2e8f0;
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  padding: 1rem;
 }
 
 .card {
@@ -36,6 +52,11 @@ defineProps({
   text-align: center;
 }
 
+.card.error {
+  background: #7f1d1d;
+  box-shadow: 0 20px 45px rgba(127, 29, 29, 0.35);
+}
+
 h1 {
   margin: 0 0 0.75rem;
   font-size: 2rem;
@@ -43,6 +64,11 @@ h1 {
 
 p {
   margin: 0;
+}
+
+.message {
   font-size: 1rem;
+  line-height: 1.5;
+  word-break: break-word;
 }
 </style>
