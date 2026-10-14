@@ -37,7 +37,11 @@ defineProps({
   display: grid;
   place-items: center;
   margin: 0;
-  background: #0f172a;
+  background: repeating-linear-gradient(
+    135deg,
+    #fef9c3 0 28px,
+    #dbeafe 28px 56px
+  );
   color: #e2e8f0;
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   padding: 1rem;
